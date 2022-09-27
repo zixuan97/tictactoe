@@ -17,4 +17,16 @@ router.route('/create').post((req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/login').post((req, res) => {
+  const { username, password } = req.body;
+  User.find({
+    username: username,
+    password: password
+  })
+    .then(() => {
+      return res.status(200).json("Login");
+    })
+    .catch((err) => res.status(500).json('Error: ' + err));
+});
+
 module.exports = router;
