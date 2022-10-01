@@ -23,10 +23,14 @@ router.route('/login').post((req, res) => {
     username: username,
     password: password
   })
-    .then(() => {
-      return res.status(200).json("Login");
+    .then((user) => {
+      console.log('successfully login');
+      return res.status(200).json(user);
     })
-    .catch((err) => res.status(500).json('Error: ' + err));
+    .catch((err) => {
+      console.log('login failed');
+      return res.status(500).json('Error: ' + err);
+    });
 });
 
 module.exports = router;

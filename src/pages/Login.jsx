@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   FormGroup,
@@ -17,6 +18,7 @@ const Login = () => {
     password: ''
   });
   const [showDialog, setShowDialog] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) =>
     setUser((prev) => {
@@ -32,7 +34,8 @@ const Login = () => {
     } else {
       fetch(login(user))
         .then(() => {
-          //Navigate to home screen
+          localStorage.setItem('loggedInUser', username)
+          navigate(`/ticTacToe/games`);
         })
         .catch((err) => {
           console.log('error: ', err);
@@ -42,7 +45,10 @@ const Login = () => {
 
   return (
     <>
-      <RegisterDialog showDialog={showDialog} setShowDialog={()=>setShowDialog(false)}/>
+      <RegisterDialog
+        showDialog={showDialog}
+        setShowDialog={() => setShowDialog(false)}
+      />
 
       <div className='login'>
         <Box className='login-box'>
