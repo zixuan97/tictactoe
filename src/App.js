@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Games from './pages/Games';
+import SingleGame from './pages/SingleGame';
 
 function App() {
   return (
@@ -19,8 +20,17 @@ function App() {
 
         <Route path='/ticTacToe' element={<Home />}>
           <Route index element={<Navigate replace to='/games' />} />
-          <Route path='profile' element={<Profile />} />
-          <Route path='games' element={<Games />} />
+          <Route
+            path='profile'
+            element={
+              <Profile username={localStorage.getItem('loggedInUser')} />
+            }
+          />
+          <Route
+            path='games'
+            element={<Games username={localStorage.getItem('loggedInUser')} />}
+          />
+          <Route path='singleGame/:roomName' element={<SingleGame />} />
         </Route>
       </Routes>
     </Router>

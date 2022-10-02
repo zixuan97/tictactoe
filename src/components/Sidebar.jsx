@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { AccountBox, People } from '@mui/icons-material';
 import { Button, Divider, Drawer, Toolbar } from '@mui/material';
 import React from 'react';
@@ -6,6 +7,12 @@ import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 
 const Sidebar = (props) => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.setItem('loggedInUser', '');
+    navigate(`/`);
+  }
+
   return (
     <div>
       <Drawer
@@ -40,6 +47,15 @@ const Sidebar = (props) => {
               <Link to='profile'>My Profile</Link>
             </MenuItem>
           </Menu>
+          <Button
+            variant='text'
+            component={Link}
+            to='/'
+            style={{ textDecoration: 'none', color: 'inherit' }}
+            onClick={()=> logout()}
+          >
+            Logout
+          </Button>
         </ProSidebar>
       </Drawer>
     </div>

@@ -41,4 +41,16 @@ router.route('/login').post(async (req, res) => {
   }
 });
 
+
+router.route('/details/:username').get(async (req, res) => {
+  const { username } = req.params;
+    const existingUser = await User.findOne({ username: username }).exec();
+    if (existingUser) {
+      delete existingUser.password;
+      res.status(200).json({ message: 'user found', user: existingUser });
+    } else {
+      res.status(401).json('no user found');
+    }
+});
+
 module.exports = router;
