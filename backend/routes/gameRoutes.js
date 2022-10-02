@@ -3,8 +3,7 @@ let Game = require('../model/GameModel');
 
 //Find all games
 router.route('/').get((req, res) => {
-  const { firstPlayerUsername } = req.body;
-  Game.find({"firstPlayerUsername": {$ne: firstPlayerUsername}})
+  Game.find()
     .then((games) => res.json(games))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
