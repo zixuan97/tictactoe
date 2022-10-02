@@ -63,12 +63,12 @@ In assumption of users having NVDA installed, all the components within the appl
 `GET ./` returns all users within the system.\
 `POST ./create` takes in a User object (see userModel.js), which requires a username, password, first name and last name.\
 `POST ./login` takes in a username and password as string, then compares with the database the username value, before retrieving the hashed password and comparing using bcrypt.\
-`GET ./details/:username` takes in a username as the query params, then returns a User object.\
+`GET ./details/:username` takes in a username as the query params, then returns a User object.
 
 ### Game Routes/APIs
 `GET ./` returns all games within the system.\
 `GET ./allGames/:firstPlayerUsername` takes in a username of the first player, then filters the games and returns all games where firstPlayerName <> the current user. This is to get a list of games that the current user can play.\
-`POST ./join` takes in a room name, and secondPlayerUsername referring to the player joining another room. This updates the second player for the game room.\
+`POST ./join` takes in a room name, and secondPlayerUsername referring to the player joining another room. This updates the second player for the game room.
 
 
 ## Design & Infrastructure Summary
@@ -78,14 +78,14 @@ In assumption of users having NVDA installed, all the components within the appl
 - Javascript was chosen over typescript as the project had several uncertainties which weren't clear. As a result, tight-coupling would set the project tempo back and slow it down due to the need to determine the typing if typescript was chosen. However, given better project management and a longer runway, perhaps typescript could be used.
 
 ## Architechture Diagram
- > User\
+ > User
   >> username: String (unique)\
   >> password: String\
   >> firstName: String\
-  >> lastName: String\
+  >> lastName: String
 
- > Game\
+ > Game
   >> roomName: String (Unique)\
   >> isActive: Boolean.true\
   >> firstPlayerUsername: String [join User.username]\
-  >> secondPlayerUsername: String [join User.username]\
+  >> secondPlayerUsername: String [join User.username]
